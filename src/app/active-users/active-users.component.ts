@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UsersService } from '../users.service';
+import { CounterService } from '../counter.service';
 
 @Component({
   selector: 'app-active-users',
@@ -10,12 +11,13 @@ export class ActiveUsersComponent {
   users: string[];
   counter: number;
   constructor(
-    private usersService: UsersService) {
+    private usersService: UsersService,
+    private counterService: CounterService) {
     this.users = usersService.activeUsers;
   }
 
   onSetToInactive(id: number) {
     this.usersService.onSetToInactive(id);
-    this.counter = this.usersService.activeCounter;
+    this.counter = this.counterService.countActiveToInactive();
   }
 }
